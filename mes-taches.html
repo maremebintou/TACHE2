@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo List – Mes tâches</title>
+    <meta
+      name="description"
+      content="Consultez, modifiez, filtrez et supprimez vos tâches enregistrées."
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body data-page="tasks">
+    <div class="page">
+      <nav class="topbar" aria-label="Navigation principale">
+        <a class="brand" href="index.html">✔ Todo List</a>
+        <div class="nav-links">
+          <a href="index.html">Accueil</a>
+          <a href="index.html#ajouter">Ajouter une tâche</a>
+          <a href="mes-taches.html" class="active" aria-current="page">Mes tâches</a>
+        </div>
+        <button
+          type="button"
+          class="theme-toggle"
+          id="theme-toggle"
+          aria-label="Basculer entre mode clair et sombre"
+          title="Mode clair / sombre"
+        >
+          🌙
+        </button>
+      </nav>
+
+      <header class="hero">
+        <p class="eyebrow">Organisation du jour</p>
+        <h1>Mes tâches</h1>
+        <p class="subtitle">
+          Retrouvez toutes vos tâches enregistrées, modifiez-les, terminez-les
+          ou supprimez-les.
+        </p>
+      </header>
+
+      <main class="card" aria-labelledby="app-title">
+        <div class="card-header">
+          <div>
+            <h2 id="app-title">Liste des tâches</h2>
+            <p id="remaining" class="remaining" aria-live="polite">
+              0 tâche restante
+            </p>
+            <p class="remaining">
+              Total : <strong id="total-count">0</strong> ·
+              Affichées : <strong id="visible-count">0</strong>
+            </p>
+          </div>
+          <span class="badge" id="total-badge" title="Nombre total de tâches">0</span>
+        </div>
+
+        <section class="chart-box" aria-labelledby="chart-title">
+          <h3 id="chart-title" class="chart-title">Répartition des tâches créées</h3>
+          <div class="chart-content">
+            <div class="pie empty" id="pie" role="img" aria-label="Diagramme circulaire : aucune tâche"></div>
+            <ul class="legend">
+              <li><span class="dot dot-progress"></span>En cours : <strong id="count-progress">0</strong> (<span id="pct-progress">0</span> %)</li>
+              <li><span class="dot dot-done"></span>Terminées : <strong id="count-done">0</strong> (<span id="pct-done">0</span> %)</li>
+              <li class="legend-total">Total créées : <strong id="count-total">0</strong></li>
+            </ul>
+          </div>
+        </section>
+
+        <div class="filters" role="group" aria-label="Filtrer les tâches">
+          <button type="button" class="chip active" data-filter="all">Toutes</button>
+          <button type="button" class="chip" data-filter="en-cours">En cours</button>
+          <button type="button" class="chip" data-filter="terminee">Terminées</button>
+        </div>
+
+        <ul id="todo-list" class="todo-list" aria-label="Liste des tâches"></ul>
+        <div id="empty-state" class="empty-state" hidden>
+          <p>Aucune tâche à afficher pour le moment.</p>
+          <a href="index.html#ajouter" class="btn btn-primary">+ Ajouter une tâche</a>
+        </div>
+      </main>
+
+      <footer class="footer">
+        <p>Données stockées localement dans votre navigateur.</p>
+      </footer>
+    </div>
+
+    <!-- Modification -->
+    <dialog id="edit-dialog" class="dialog" aria-labelledby="edit-heading">
+      <form id="edit-form" novalidate>
+        <h2 id="edit-heading">Modifier la tâche</h2>
+        <div class="field">
+          <label for="edit-title">Titre *</label>
+          <input id="edit-title" type="text" maxlength="120" required />
+          <small class="error" id="edit-title-error" hidden>Le titre est obligatoire.</small>
+        </div>
+        <div class="field">
+          <label for="edit-description">Description</label>
+          <textarea id="edit-description" rows="3" maxlength="500"></textarea>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label for="edit-date">Date *</label>
+            <input id="edit-date" type="date" required />
+            <small class="error" id="edit-date-error" hidden>Choisissez une date.</small>
+          </div>
+          <div class="field">
+            <label for="edit-time">Heure</label>
+            <input id="edit-time" type="time" />
+          </div>
+          <div class="field">
+            <label for="edit-status">Statut</label>
+            <select id="edit-status">
+              <option value="en-cours">En cours</option>
+              <option value="terminee">Terminée</option>
+            </select>
+          </div>
+        </div>
+        <div class="dialog-actions">
+          <button type="button" class="btn btn-outline" id="edit-cancel">Annuler</button>
+          <button type="submit" class="btn btn-primary">Enregistrer</button>
+        </div>
+      </form>
+    </dialog>
+
+    <!-- Confirmation de suppression -->
+    <dialog id="delete-dialog" class="dialog dialog-small" aria-labelledby="delete-heading">
+      <h2 id="delete-heading">Supprimer la tâche ?</h2>
+      <p class="remaining">« <span id="delete-name"></span> » sera définitivement supprimée.</p>
+      <div class="dialog-actions">
+        <button type="button" class="btn btn-outline" id="delete-cancel">Annuler</button>
+        <button type="button" class="btn btn-danger" id="delete-confirm">Supprimer</button>
+      </div>
+    </dialog>
+  </body>
+</html>

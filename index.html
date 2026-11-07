@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo List – Accueil</title>
+    <meta
+      name="description"
+      content="Application de liste de tâches moderne, responsive, avec sauvegarde locale."
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body data-page="home">
+    <div class="page">
+      <nav class="topbar" aria-label="Navigation principale">
+        <a class="brand" href="index.html">✔ Todo List</a>
+        <div class="nav-links">
+          <a href="index.html" class="active" aria-current="page">Accueil</a>
+          <a href="index.html#ajouter">Ajouter une tâche</a>
+          <a href="mes-taches.html">Mes tâches</a>
+        </div>
+        <button
+          type="button"
+          class="theme-toggle"
+          id="theme-toggle"
+          aria-label="Basculer entre mode clair et sombre"
+          title="Mode clair / sombre"
+        >
+          🌙
+        </button>
+      </nav>
+
+      <header class="hero">
+        <p class="eyebrow">Organisation du jour</p>
+        <h1>Todo List</h1>
+        <p class="subtitle">
+          Ajoutez, terminez et organisez vos tâches. Tout est sauvegardé
+          automatiquement sur cet appareil.
+        </p>
+      </header>
+
+      <main class="card" id="ajouter" aria-labelledby="app-title">
+        <div class="card-header">
+          <div>
+            <h2 id="app-title">Ajouter une tâche</h2>
+            <p id="remaining" class="remaining" aria-live="polite">
+              0 tâche restante
+            </p>
+          </div>
+          <span class="badge" id="total-badge" title="Nombre total de tâches">0</span>
+        </div>
+
+        <div id="confirmation" class="alert" role="status" hidden>
+          <span>✅ Tâche enregistrée avec succès !</span>
+          <a href="mes-taches.html" class="btn btn-small">Voir mes tâches →</a>
+        </div>
+
+        <form id="todo-form" class="todo-form" autocomplete="off" novalidate>
+          <div class="field">
+            <label for="todo-input">Titre *</label>
+            <input
+              id="todo-input"
+              name="title"
+              type="text"
+              maxlength="120"
+              placeholder="Ex : Préparer le cours"
+              required
+            />
+            <small class="error" id="title-error" hidden>Le titre est obligatoire.</small>
+          </div>
+
+          <div class="field">
+            <label for="todo-description">Description</label>
+            <textarea
+              id="todo-description"
+              name="description"
+              rows="3"
+              maxlength="500"
+              placeholder="Détails de la tâche (facultatif)…"
+            ></textarea>
+          </div>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="todo-date">Date *</label>
+              <input id="todo-date" name="date" type="date" required />
+              <small class="error" id="date-error" hidden>Choisissez une date.</small>
+            </div>
+            <div class="field">
+              <label for="todo-time">Heure</label>
+              <input id="todo-time" name="time" type="time" />
+            </div>
+            <div class="field">
+              <label for="todo-status">Statut</label>
+              <select id="todo-status" name="status">
+                <option value="en-cours">En cours</option>
+                <option value="terminee">Terminée</option>
+              </select>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Enregistrer la tâche</button>
+        </form>
+
+        <a href="mes-taches.html" class="btn btn-outline btn-block">Accéder à « Mes tâches »</a>
+      </main>
+
+      <footer class="footer">
+        <p>Données stockées localement dans votre navigateur.</p>
+      </footer>
+    </div>
+  </body>
+</html>
